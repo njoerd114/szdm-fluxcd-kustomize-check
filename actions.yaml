@@ -1,0 +1,33 @@
+name: 'fluxcd-kustomize-check'
+description: 'check fluxcd and kustomize folder'
+inputs:
+  path:
+    description: 'Where to check a path'
+    required: true
+  kustomize-version:
+    description: 'Version of kustomize to install'
+    required: false
+    default: 'latest'
+  kubeconform-version:
+    description: 'Version of kubeconform to install'
+    required: false
+    default: 'latest'
+  yq-version:
+    description: 'Version of yq to install'
+    required: false
+    default: 'latest'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Tools
+      env:
+        KUBECONFORM_VERSION: ${{ inputs.kubeconform-version }}
+        KUSTOMIZE_VERSION: ${{ inputs.kustomize-version }}
+        YQ_VERSION: ${{ inputs.yq-version }}
+      run: ${{ github.action_path }}/scripts/install_tools.sh
+      shell: bash
+    - name: Run Check
+      run: ${{ github.action_path }}/scripts/install_tools.sh
+      shell: bash
+      working-directory: ${{ inputs.path }}
