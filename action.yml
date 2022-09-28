@@ -28,6 +28,6 @@ runs:
       run: ${{ github.action_path }}/scripts/install_tools.sh
       shell: bash
     - name: Run Check
-      run: ${{ github.action_path }}/scripts/install_tools.sh
+      run: ${{ github.action_path }}/scripts/validate.sh
       shell: bash
       working-directory: ${{ inputs.path }}
